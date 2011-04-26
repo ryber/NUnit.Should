@@ -14,6 +14,9 @@ Global
 		{CBD62FA3-B8D3-4FC3-B6B7-A236083B3186}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBD62FA3-B8D3-4FC3-B6B7-A236083B3186}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = NUnit.Should\NUnit.Should.csproj
 	EndGlobalSection

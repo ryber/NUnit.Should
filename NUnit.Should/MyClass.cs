@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace NUnit.Should
@@ -9,73 +10,73 @@ namespace NUnit.Should
 	{
 		public static void ShouldContain(this string self, string str)
 		{
-			Assert.That(str, Text.Contains(self));
+			Assert.That(str, Is.StringContaining(self));
 		}
 
-		public static void ShouldContain(this string self, string str, StringComparison comparison)
-		{
-			Assert.Contains(str, self, comparison);
-		}
+        //public static void ShouldContain(this string self, string str, StringComparison comparison)
+        //{
+        //    Assert.That(str, Is.StringContaining(self).And.));
+        //}
 
 		public static void ShouldContain<T>(this IEnumerable<T> series, T item)
 		{
-			Assert.Contains(item, series);
+            Assert.That(series, Has.Member(item));
 		}
 
-		public static void ShouldContain<T>(this IEnumerable<T> series, T item, IComparer<T> comparer)
-		{
-			Assert.Contains(item, series, comparer);
-		}
+        //public static void ShouldContain<T>(this IEnumerable<T> series, T item, IComparer<T> comparer)
+        //{
+        //    Assert.Contains(item, series, comparer);
+        //}
 
 		public static void ShouldNotContain(this string self, string str)
 		{
-			Assert.DoesNotContain(str, self);
+			Assert.That(str, Is.Not.StringContaining(self));
 		}
 
-		public static void ShouldNotContain(this string self, string str, StringComparison comparison)
-		{
-			Assert.DoesNotContain(str, self, comparison);
-		}
+        //public static void ShouldNotContain(this string self, string str, StringComparison comparison)
+        //{
+        //    Assert.DoesNotContain(str, self, comparison);
+        //}
 
 		public static void ShouldNotContain<T>(this IEnumerable<T> series, T item)
 		{
-			Assert.DoesNotContain(item, series);
+			Assert.That(series, Has.No.Member(item));
 		}
 
-		public static void ShouldNotContain<T>(this IEnumerable<T> series, T item, IComparer<T> comparer)
-		{
-			Assert.DoesNotContain(item, series, comparer);
-		}
+        //public static void ShouldNotContain<T>(this IEnumerable<T> series, T item, IComparer<T> comparer)
+        //{
+        //    Assert.DoesNotContain(item, series, comparer);
+        //}
 
 		public static void ShouldBeEmpty(this IEnumerable series)
 		{
-			Assert.Empty(series);
+			Assert.That(series, Is.Empty);
 		}
 
 		public static void ShouldNotBeEmpty(this IEnumerable series)
 		{
-			Assert.NotEmpty(series);
+            Assert.That(series, Is.Not.Empty);
 		}
 
 		public static void ShouldBe<T>(this T self, T other)
 		{
-			Assert.Equal(other, self);
+			Assert.Equals(other, self);
 		}
 
-		public static void ShouldBe<T>(this T self, T other, IComparer<T> comparer)
-		{
-			Assert.Equal(other, self, comparer);
-		}
+        //public static void ShouldBe<T>(this T self, T other, IComparer<T> comparer)
+        //{
+        //    Assert.Equals(other, self, comparer);
+        //}
 
 		public static void ShouldNotBe<T>(this T self, T other)
 		{
-			Assert.NotEqual(other, self);
+			Assert.AreNotEqual(other, self);
 		}
 
-		public static void ShouldNotBe<T>(this T self, T other, IComparer<T> comparer)
-		{
-			Assert.NotEqual(other, self, comparer);
-		}
+        //public static void ShouldNotBe<T>(this T self, T other, IComparer<T> comparer)
+        //{
+        //    Assert.NotEqual(other, self, comparer);
+        //}
 
 		public static void ShouldBeNull(this object self)
 		{
@@ -89,12 +90,12 @@ namespace NUnit.Should
 
 		public static void ShouldBeSameAs(this object self, object other)
 		{
-			Assert.Same(other, self);
+			Assert.AreSame(other, self);
 		}
 
 		public static void ShouldNotBeSameAs(this object self, object other)
 		{
-			Assert.NotSame(other, self);
+			Assert.AreNotSame(other, self);
 		}
 
 		public static void ShouldBeTrue(this bool self)
@@ -117,14 +118,14 @@ namespace NUnit.Should
 			Assert.False(self, message);
 		}
 
-		public static void ShouldBeInRange<T>(this T self, T low, T high)
+		public static void ShouldBeInRange<T>(this T self, T low, T high) where T : IComparable
 		{
-			Assert.InRange(self, low, high);
+			Assert.That(self, Is.InRange(low, high));
 		}
 
-		public static void ShouldNotBeInRange<T>(this T self, T low, T high)
+        public static void ShouldNotBeInRange<T>(this T self, T low, T high) where T : IComparable
 		{
-			Assert.NotInRange(self, low, high);
+            Assert.That(self, Is.Not.InRange(low, high));
 		}
 
 		public static void ShouldBeGreaterThan<T>(this T self, T other)
@@ -173,22 +174,22 @@ namespace NUnit.Should
 
 		public static void ShouldBeInstanceOf<T>(this object self)
 		{
-			Assert.IsType<T>(self);
+			Assert.That(self, Is.InstanceOf(typeof(T)));
 		}
 
 		public static void ShouldBeInstanceOf(this object self, Type type)
 		{
-			Assert.IsType(type, self);
+            Assert.That(self, Is.InstanceOf(type));
 		}
 
 		public static void ShouldNotBeInstanceOf<T>(this object self)
 		{
-			Assert.IsNotType<T>(self);
+            Assert.That(self, Is.Not.InstanceOf(typeof(T)));
 		}
 
 		public static void ShouldNotBeInstanceOf(this object self, Type type)
 		{
-			Assert.IsNotType(type, self);
+            Assert.That(self, Is.Not.InstanceOf(type));
 		}
 
 	/*	public static void ShouldBeThrownBy<T>(this T self, Assert.ThrowsDelegate method)

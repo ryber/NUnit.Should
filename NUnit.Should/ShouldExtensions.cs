@@ -10,7 +10,7 @@ namespace NUnit.Should
 	{
 		public static void ShouldContain(this string self, string str)
 		{
-			Assert.That(str, Is.StringContaining(self));
+            Assert.That(self, Is.StringContaining(str));
 		}
 
         //public static void ShouldContain(this string self, string str, StringComparison comparison)
@@ -30,7 +30,7 @@ namespace NUnit.Should
 
 		public static void ShouldNotContain(this string self, string str)
 		{
-			Assert.That(str, Is.Not.StringContaining(self));
+            Assert.That(self, Is.Not.StringContaining(str));
 		}
 
         //public static void ShouldNotContain(this string self, string str, StringComparison comparison)
@@ -60,7 +60,7 @@ namespace NUnit.Should
 
 		public static void ShouldBe<T>(this T self, T other)
 		{
-			Assert.Equals(other, self);
+			Assert.That(self, Is.EqualTo(other));
 		}
 
         //public static void ShouldBe<T>(this T self, T other, IComparer<T> comparer)
@@ -192,10 +192,10 @@ namespace NUnit.Should
             Assert.That(self, Is.Not.InstanceOf(type));
 		}
 
-	/*	public static void ShouldBeThrownBy<T>(this T self, Assert.ThrowsDelegate method)
+        public static void ShouldBeThrownBy<T>(this T self, TestDelegate method)
 			where T : Exception
 		{
 			Assert.Throws<T>(method);
-		}*/
+		}
 	}
 }

@@ -289,15 +289,51 @@ namespace NUnit.Should.Test
         }
 
         [Test]
-        public void ShouldBeInstanceOf()
+        public void ShouldBeInstanceOfT()
         {
             1.ShouldBeInstanceOf<int>();
         }
 
-        [Test]
-        public void ShouldBeInstanceOfException()
+        [Test, ExpectedException(typeof(AssertionException))]
+        public void ShouldBeInstanceOfTException()
         {
             1.ShouldBeInstanceOf<string>();
+        }
+
+        [Test]
+        public void ShouldNotBeInstanceOfT()
+        {
+            1.ShouldNotBeInstanceOf<string>();
+        }
+
+        [Test, ExpectedException(typeof(AssertionException))]
+        public void ShouldNotBeInstanceOfTException()
+        {
+            1.ShouldNotBeInstanceOf<int>();
+        }
+
+        [Test]
+        public void ShouldBeInstanceOf()
+        {
+            1.ShouldBeInstanceOf(typeof(int));
+        }
+
+        [Test, ExpectedException(typeof(AssertionException))]
+        public void ShouldBeInstanceOfException()
+        {
+            1.ShouldBeInstanceOf(typeof(string));
+        }
+
+        [Test]
+        public void ShouldNotBeInstanceOf()
+        {
+            1.ShouldNotBeInstanceOf(typeof(string));
+        }
+
+        [Test, ExpectedException(typeof(AssertionException))]
+        public void ShouldNotBeInstanceOfException()
+        {
+            1.ShouldNotBeInstanceOf(typeof(int));
         }
     }
 }
